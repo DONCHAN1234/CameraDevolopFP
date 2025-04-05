@@ -8,3 +8,4 @@ tensorflow==2.18.0
 mysql-connector-python==8.4.0
 twilio==8.10.0
 requests==2.31.0
+streamlit-webrtc==0.45.0
