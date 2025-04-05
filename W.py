@@ -164,11 +164,6 @@ class FireDetector(VideoTransformerBase):
             sensor = get_sensor_data()
             smoke = sensor.get("smoke", 0)
             temp = sensor.get("temp", 0)
-            
-            #if camera_pred > 0.2 :
-                #print('Fire🔥')
-            #else :
-                #print('Not FIre')
 
             if camera_pred > 0.2 and smoke >= 250 and temp >= 13:
                 self.count += 1
@@ -210,7 +205,10 @@ if st.session_state.camera_on:
         key="fire-detect",
         video_processor_factory=FireDetector,
         media_stream_constraints={"video": True, "audio": False},
-        async_processing=True
+        async_processing=True,
+        rtc_configuration={
+            "iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]
+        }
     )
 
     st.subheader("Live Fire Detection Result")
